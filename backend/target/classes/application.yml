@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  data:
+    mongodb:
+      # For local MongoDB installed on your machine, this default works as-is.
+      # For MongoDB Atlas (free cloud option), replace with your Atlas connection string
+      # and set it via the MONGODB_URI environment variable instead of editing this file.
+      uri: ${MONGODB_URI:mongodb://localhost:27017/unlock}
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            # NEVER put real secrets directly in this file if you plan to
+            # push this to GitHub. Set these as environment variables instead
+            # (see the README for exact steps).
+            client-id: ${GITHUB_CLIENT_ID}
+            client-secret: ${GITHUB_CLIENT_SECRET}
+            scope:
+              - read:user
+              - user:email
+              - public_repo   # needed so we're allowed to read the student's public repos
